@@ -1,7 +1,7 @@
 package com.jacoobia.jcommands.api;
 
 import com.jacoobia.jcommands.api.annotations.Command;
-import com.jacoobia.jcommands.api.annotations.SingleCommand;
+import com.jacoobia.jcommands.api.annotations.BaseCommand;
 import com.jacoobia.jcommands.api.annotations.SubCommand;
 import com.jacoobia.jcommands.data.CommandData;
 import com.jacoobia.jcommands.util.StringUtils;
@@ -17,7 +17,7 @@ import java.util.Map;
  * for use immediately.
  * A command class should follow a few simple rules, the first
  * being it must extend this class, it must then have methods with
- * either {@link SingleCommand} or {@link SubCommand}.
+ * either {@link BaseCommand} or {@link SubCommand}.
  *
  * @author Jacoobia - https://github.com/jacoobia
  */
@@ -90,7 +90,7 @@ public class CommandProcessor {
     /**
      * If a class is annotated with the {@link Command} annotation then the methods
      * within it require either the {@link SubCommand} or if you're writing anonymous
-     * classes to hold single commands (not recommended) then the {@link SingleCommand}
+     * classes to hold single commands (not recommended) then the {@link BaseCommand}
      * annotation
      *
      * @param methods the methods in the class
@@ -100,7 +100,7 @@ public class CommandProcessor {
             if (method.isAnnotationPresent(SubCommand.class)) {
                 String[] qualifiers = method.getAnnotation(SubCommand.class).value();
                 Arrays.stream(qualifiers).forEach(qualifier -> commands.put(qualifier, method));
-            } else if (method.isAnnotationPresent(SingleCommand.class)) {
+            } else if (method.isAnnotationPresent(BaseCommand.class)) {
                 String[] qualifiers = getClass().getAnnotation(Command.class).value();
                 Arrays.stream(qualifiers).forEach(qualifier -> commands.put(qualifier, methods[0]));
             }
