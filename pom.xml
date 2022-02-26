@@ -6,12 +6,36 @@
 
     <groupId>com.jacoobia</groupId>
     <artifactId>JCommands</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <name>JCommands</name>
+    <description>An annotation driven command library for the JDA.</description>
+    <url>https://github.com/jacoobia/JCommands</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>(Anthony) Jacob Hampton</name>
+            <email>jacob.hampton@hotmail.co.uk</email>
+        </developer>
+    </developers>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
+
+    <scm>
+        <connection>scm:git:git://github.com/jacoobia/JCommands.git</connection>
+        <developerConnection>scm:git:ssh://github.com:jacoobia/JCommands.git</developerConnection>
+        <url>https://github.com/jacoobia/JCommands</url>
+    </scm>
 
     <dependencies>
         <dependency>
