@@ -9,6 +9,9 @@ import java.util.Arrays;
  */
 public class StringUtils {
 
+    /**
+     * A constant for a completely blank string
+     */
     public static String BLANK = "";
 
     /**
