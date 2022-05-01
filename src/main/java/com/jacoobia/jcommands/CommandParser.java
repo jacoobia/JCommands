@@ -4,7 +4,7 @@ import com.jacoobia.jcommands.api.CommandProcessor;
 import com.jacoobia.jcommands.data.CommandData;
 import com.jacoobia.jcommands.util.StringUtils;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,12 +23,14 @@ public class CommandParser extends ListenerAdapter {
     private static final int MAX_ARG_COUNT = 20;
 
     @Override
-    public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
-            if(event.getMessage().getContentRaw().startsWith(CommandCentre.prefix)) {
-            CommandData command = parseCommand(event);
-            for (CommandProcessor processor : commandProcessors) {
-                if (processor.relevantCommand(command)) {
-                    processor.process(command);
+    public void onMessageReceived(@NotNull MessageReceivedEvent event) {
+        if(event.isFromGuild()) {
+            if (event.getMessage().getContentRaw().startsWith(CommandCentre.prefix)) {
+                CommandData command = parseCommand(event);
+                for (CommandProcessor processor : commandProcessors) {
+                    if (processor.relevantCommand(command)) {
+                        processor.process(command);
+                    }
                 }
             }
         }
@@ -59,7 +61,7 @@ public class CommandParser extends ListenerAdapter {
      * @param event the message event
      * @return a newly constructed command object
      */
-    public CommandData parseCommand(GuildMessageReceivedEvent event) {
+    public CommandData parseCommand(MessageReceivedEvent event) {
         Message message = event.getMessage();
         CommandData command = new CommandData();
         String commandName = splitMessage(message)[0].replace("!", StringUtils.BLANK);
